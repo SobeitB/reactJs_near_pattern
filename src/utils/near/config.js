@@ -1,4 +1,5 @@
-const CONTRACT_NAME = process.env.CONTRACT_ID
+import {CONTRACT_ID} from '../../env'
+const CONTRACT_NAME = CONTRACT_ID
 
 function getConfig(env = 'testnet') {
   switch (env) {
@@ -60,4 +61,4 @@ function getConfig(env = 'testnet') {
   }
 }
 
-module.exports = getConfig
+export default getConfig

@@ -1,0 +1,29 @@
+@font-face {
+  font-family: alagard;
+  src: url(../assets/fonts/alagard.ttf);
+}
+ 
+.plcontent2{
+  background: url(../assets/img/bc.png);
+  background-size: cover !important;
+  font-family: alagard;
+  min-height: 100vh;
+  /* display: flex;
+  flex-direction: column; */
+}
+ 
+.header2{
+  background: transparent !important;
+}
+ 
+.footer2{
+  background: transparent !important;
+  color: rgba(var(--bs-black-rgb),var(--bs-text-opacity))!important;
+}
+ 
+.bgdrop{
+  background: rgba(18, 33, 44, 0.36);
+  backdrop-filter: blur(26px);
+  padding: 2em !important;
+  color: white;
+}

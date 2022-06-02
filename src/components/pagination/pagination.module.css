@@ -1,0 +1,48 @@
+.pagination_body{
+   width: 53%;
+   margin:0 auto;
+   display:flex;
+   justify-content: space-between;
+   margin-top:24px;
+   position: relative;
+}
+
+.next{
+   transform: rotate(180deg);
+   cursor: pointer;
+}
+
+.pagination{
+   width: 85%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.pagination_pages{
+   width: 35.45px;
+   height: 35.45px;
+   background-image:url(./img/border.png);
+   border-radius: 50%;
+   display:flex;
+   align-items: center;
+   justify-content: center;
+
+   cursor: pointer;
+   font-family: 'Alagard';
+   font-style: normal;
+   font-weight: 500;
+   font-size: 18.8319px;
+   line-height: 19px;
+   text-align: center;
+   color: #344453;
+   text-decoration: none;
+}
+
+.pagination_pages:hover{
+   color:#543927;
+}
+
+.pages_active{
+   background:#778ca4;
+}
+

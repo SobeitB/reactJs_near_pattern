@@ -1,0 +1,30 @@
+<svg width="202" height="40" viewBox="0 0 202 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect x="3" y="3" width="195" height="33" fill="#FDDBCB"/>
+<rect width="28" height="160" transform="matrix(4.37114e-08 -1 -1 -4.37114e-08 178 39)" fill="url(#pattern0)"/>
+<rect x="173" width="28" height="155" transform="rotate(90 173 0)" fill="url(#pattern1)"/>
+<rect y="39.2786" width="28.1856" height="28.6716" transform="rotate(-90 0 39.2786)" fill="url(#pattern2)"/>
+<rect width="28.1856" height="28.6716" transform="matrix(-4.37114e-08 -1 -1 4.37114e-08 201.672 39.2786)" fill="url(#pattern3)"/>
+<rect width="28.1856" height="28.6716" transform="matrix(4.37114e-08 1 1 -4.37114e-08 0 0)" fill="url(#pattern4)"/>
+<rect x="201.672" width="28.1856" height="28.6716" transform="rotate(90 201.672 0)" fill="url(#pattern5)"/>
+<defs>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_20_5980" transform="translate(-0.00995241 -1.21314) scale(0.0303724 0.0654673)"/>
+</pattern>
+<pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_20_5980" transform="translate(1.42627e-07 -1.28453) scale(0.0303724 0.0675792)"/>
+</pattern>
+<pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_20_5980" transform="scale(0.0301724 0.029661)"/>
+</pattern>
+<pattern id="pattern3" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_20_5980" transform="scale(0.0301724 0.029661)"/>
+</pattern>
+<pattern id="pattern4" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_20_5980" transform="scale(0.0301724 0.029661)"/>
+</pattern>
+<pattern id="pattern5" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_20_5980" transform="scale(0.0301724 0.029661)"/>
+</pattern>
+<image id="image0_20_5980" width="44" height="44" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAAAXNSR0IArs4c6QAAANRJREFUWIXt2TEOwyAQRNEl4hCULn0E37/yEVxSUqZM51REGBZHijRiieZ3CSmekUPBuhDCKZ1SSq63huzO5EVE4rE3C8u6AUnf65l8+aHu7knR1Z78AF770lol3t8tWqjexAs4Y+Oxy7JuQ/902VBv4Ads8XXQTG62Y+3yo9czniNPhjrN9BgJ+iWC0RGMjmB0BKMjGB3B6AhGRzA6gtERjI5gdASjIxjddJeB/zHjsHJXrJmaGUd5621hKJNNuWbGYWV3e6kzDst1ZxwWhjJa0x1rb3YAY7/VxRiWAAAAAElFTkSuQmCC"/>
+</defs>
+</svg>

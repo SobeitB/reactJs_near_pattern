@@ -1,0 +1,45 @@
+.not__nft_body{
+   background: url(./img/bg_notNft.png);
+   background-color: white;
+   background-repeat: no-repeat;
+   background-position: 50% 50%;
+   background-size: 100% 100%;
+   height: 100%;
+
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.title_skelet{
+   margin-top:72px;
+   margin-bottom:16px;
+}
+
+.not__nft_title{
+   font-family: 'Alagard';
+   font-style: normal;
+   font-weight: 500;
+   font-size: 32px;
+   line-height: 33px;
+   text-align: center;
+   color: #543927;
+   margin-bottom:32px;
+}
+
+.not__nft_btn{
+   width: 208.19px;
+   height: 41.81px;
+   border-image:url(./img/border.png) 19 / 19px round;
+
+   font-family: 'Alagard';
+   font-style: normal;
+   font-weight: 500;
+   font-size: 26.2733px;
+   line-height: 27px;
+   color: #543927;
+}
+
+.not__nft_market{
+   margin-right: 21px;
+}

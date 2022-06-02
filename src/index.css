@@ -1,13 +1,231 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: alagard;
+  src: url(./assets/fonts/alagard.ttf);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.plcontent{
+  background-color: #E9D2B8;
+  font-family: alagard;
+}
+
+.plcontent{
+  min-height: 100vh;
+  display: flex; 
+  flex-direction: column;
+}
+
+.main{
+  flex: 1 1 auto;
+  height:100%;
+}
+
+.mainLoader{
+  flex: 1 1 auto;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+
+.header{
+  background: url("./assets/img/menu.png");
+  min-height: 130px;
+}
+
+.link_home{
+  color:white;
+  font-size: 1.25rem;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.header_link_body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  margin-left:41.5px;
+}
+
+.header_link_body:first-child{
+  margin-left:0px;
+} 
+
+@media (max-width: 991px) {
+  .header_link_body{
+    margin-left:20px;
+  }
+}
+
+.header_link{
+  font-family: 'Alagard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 23px;
+  text-align: right;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.header_link:hover {
+  color: rgba(255,255,255,.75);
+}
+
+.header_img{
+  max-width: 108px;
+  height: 9.34px;
+}
+
+.footer{
+  background: url("./assets/img/footer.png");
+  min-height: 130px;
+  color: white;
+}
+
+.nav-link{
+  font-size: 23px;
+  padding-right: 55px !important;
+}
+
+.pilgrim_detail{
+
+  background: url("./assets/img/book.png");
+  background-size: 100% 100%;
+  /*padding: 30px;*/
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 30px;
+  padding-bottom: 70px;
+  /*height: 606px*/
+}
+
+.with_frame{
+  background-size: 100% 100% !important;
+}
+
+.with_frame2{
+  background: url("./assets/img/frame-mini.png");
+  background-size: 100% 100% !important;
+  line-height: 15px;
+  min-height: 79px;
+}
+
+.btn-conn{
+  background: url("./assets/img/btn-conn.png");;
+  background-size: 95% 95% !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 15px;
+  text-align: center;
+}
+
+.btn-conn a{
+  text-decoration: none;
+  color: #543927;
+  font-weight: bold;
+}
+
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #543927 #fddbcb;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #fddbcb;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #543927;
+    border-radius: 10px;
+    border: 0px solid #ffffff;
+  }
+
+  @media (max-width: 767.98px) {
+    .pilgrim{
+      padding: 20px;
+    }
+    .pilgrim_detail{
+
+      background: url("./assets/img/mobile-book.png");
+      background-size: 100% 100%;
+      /*padding: 30px;*/
+      /*height: 606px*/
+    }
+
+    .header{
+      background: url("./assets/img/navv.png");
+      /*min-height: 130px;*/
+      background-size: auto 100%;
+      /*background-size: contain;*/
+      /*background-repeat: repeat-x;*/
+      padding-bottom: 20px;
+    }
+
+    .navbar-nav .nav-link {
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+    }
+    
+
+
+  }
+
+.swiper-button-prev, .swiper-button-next, .swiper-button-lock{
+  display: block !important;
+  opacity:1 !important;
+  background:url(./components/pagination/img/pagination.png) !important;
+  background-repeat:no-repeat !important;
+  background-position: 50% 50% !important;
+  z-index: 1000 !important;
+  pointer-events:fill !important;
+  cursor: pointer !important;
+}
+
+.swiper-button-next{
+  transform: rotate(180deg);
+}
+
+.swiper-button-prev:after, .swiper-button-next:after{
+  content: '' !important;
+}
+
+.swiper {
+  width: 80%;
+  height: 100%;
+  position:initial !important;
+}
+
+.title{
+  font-family: 'Alagard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 39px;
+  line-height: 40px;
+  text-align: center;
+  color: #543927;
+
+  margin:18px 0;
+}
+
+.not__nft_btn{
+  width: 208.19px;
+  height: 41.81px;
+  border-image:url(./components/NoNft/img/border.png) 19 / 19px round;
+
+  font-family: 'Alagard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26.2733px;
+  line-height: 27px;
+  color: #543927;
 }
