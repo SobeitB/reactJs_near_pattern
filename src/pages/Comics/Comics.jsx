@@ -82,7 +82,7 @@ const Comics = () => {
                               className="comics"
                               alt=""
                            />
-                           <Link to={`/comics/${e._objCount}/1`}>
+                           <Link to={`/comics/${e.attributes.count}/1`}>
                               <button className="readComics">open</button>
                            </Link>
                         </Col>
@@ -92,11 +92,13 @@ const Comics = () => {
                   <NoNft text="comics" />
                }
 
-               <Pagination 
-                  pages={pages}
-                  allPages={allPages}
-                  setPages={setPages}
-               />
+               {isOwnerShip &&
+                  <Pagination 
+                     pages={pages}
+                     allPages={allPages}
+                     setPages={setPages}
+                  />
+               }
             </Row>
         </Container>
       </div>

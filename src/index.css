@@ -229,3 +229,7 @@
   line-height: 27px;
   color: #543927;
 }
+
+.swiper-wrapper{
+  justify-content:center;
+}

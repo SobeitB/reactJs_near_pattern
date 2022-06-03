@@ -7,6 +7,7 @@ import {Suspense, lazy} from 'react';
 import {Loader} from '../components/Loader/Loader'
 import { IsNft } from "./isNft";
 import { IsAdmin } from "./isAdmin";
+import { IsPageComics } from "./isPagesComics";
 import { Error404 } from "../pages/Error404/Error404";
 const Home = lazy(() => import ('../pages/Home'));
 const Pilgrim = lazy(() => import ('../pages/Pilgrim/Pilgrim'));
@@ -54,7 +55,9 @@ export const RouterProvider = () => {
             <Suspense fallback={<main className="mainLoader"><Loader /></main>}>
               <main className="main">
                   <IsNft>
-                     <Lore />
+                     <IsPageComics>
+                        <Lore />
+                     </IsPageComics>
                   </IsNft>
                </main>
             </Suspense>

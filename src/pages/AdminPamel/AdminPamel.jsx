@@ -14,7 +14,7 @@ import {useNavigate} from 'react-router'
 import {FormGroup} from './Boostrap'
 
 const AdminPamel = () => {
-   const {login} = useMoralis();
+   const {login, Moralis} = useMoralis();
    const { save } = useNewMoralisObject("comics");
    const {saveFile} = useMoralisFile();
    const [file, setFile] = useState('');
@@ -22,13 +22,21 @@ const AdminPamel = () => {
 
    const newComics = async (value) => {
       await login("admin", "admin")
-      console.log(value)
+
+      const Comics = Moralis.Object.extend("comics");
+      const query = new Moralis.Query(Comics);
+      const comicsFilter = await query
+      .find();
+      let count = comicsFilter.length ? Number(comicsFilter[comicsFilter.length - 1].attributes.count) + 1 : 1
+
       let comics = {
          Title:value.Title,
          File:"",
+         pages:[],
+         count:String(count),
       }
 
-      await saveFile("comics.jpg", file, {
+      await saveFile("comics.png", file, {
          type: "image/png",
          onSuccess: (result) => {
             console.log(result._url)

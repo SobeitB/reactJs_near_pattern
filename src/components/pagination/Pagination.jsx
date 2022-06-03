@@ -4,11 +4,34 @@ import 'swiper/css';
 import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper";
 import { Link, useParams} from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import {useMoralis} from "react-moralis";
 
 export const PaginationComp = () => {
-   const [pagesBtn, setPagesBtn] = useState([1,2,3,4,5,6,7,8,9,10, 11, 12, 13, 14, 15, 16, 17,18, 19]);
+   const [pagesBtn, setPagesBtn] = useState([]);
    const {token_id, pages} = useParams();
+   const {Moralis} = useMoralis()
+
+   useEffect(() => {
+      const getPages = async () => {
+         const Comics = Moralis.Object.extend("comics");
+         const query = new Moralis.Query(Comics);
+         const pages = await query
+         .equalTo("count", token_id)
+         .first();
+
+         for(let i = 0; i < pages.attributes.pages.length; i++) {
+            setPagesBtn((prevVal) => {
+               return [
+                  ...prevVal,
+                  i + 1
+               ]
+            });
+         }
+      }
+
+      getPages()
+   }, [])
    
    return(
       <div className={s.pagination_body}>
@@ -21,7 +44,10 @@ export const PaginationComp = () => {
             >
                {pagesBtn.map((page) => {
                   return(
-                     <SwiperSlide key={page}>
+                     <SwiperSlide 
+                     className={s.swiper_slide}
+                        key={page}
+                     >
                         <Link 
                            to={`/comics/${token_id}/${page}`}
                            className={`${s.pagination_pages} ${pages === String(page) && s.pages_active}`}
