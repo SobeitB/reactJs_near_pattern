@@ -22,8 +22,43 @@
 }
  
 .bgdrop{
+  height: 580px;
+  width: 1280px;
   background: rgba(18, 33, 44, 0.36);
+  background-image: url('../assets/img/homeBg.png');
+  background-position: 50% 50%;
+  background-size: 100% 100%;
   backdrop-filter: blur(26px);
-  padding: 2em !important;
   color: white;
+
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  padding:0 10px;
+  padding-top:69px;
+}
+
+@media (max-width:992px) {
+  .bgdrop{
+    height: 655px;
+  }
+}
+
+
+@media (max-width:420px) {
+  .bgdrop{
+    height: 705px;
+  }
+}
+
+@media (max-width:420px) {
+  .bgdrop{
+    height: 730px; 
+  }
+}
+
+@media (max-width:310px) {
+  .bgdrop{
+    height: 770px; 
+  }
 }

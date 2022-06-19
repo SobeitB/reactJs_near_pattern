@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 
 function App() {
   const {pathname} = useLocation()
-
   return(
     <div className={pathname === "/" ? 'plcontent2' :'plcontent'}>
       <Header />

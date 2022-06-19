@@ -1,11 +1,10 @@
 import s from './Lore.module.css'
 import { Container } from 'react-bootstrap';
-import HeaderTop from '../../assets/img/header-top.png';
-import HeaderBot from '../../assets/img/header-bot.png';
 import { PaginationComp } from '../../components/pagination/Pagination';
 import {useState, useCallback, useEffect} from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
 import {Modal, Button, Form} from 'react-bootstrap'
+import {Title} from '../../components/Title/Title'
 import { 
    useMoralisFile, 
    useMoralis,
@@ -17,6 +16,7 @@ const Lore = () => {
    const {saveFile} = useMoralisFile();
    const [show, setShow] = useState(false);
    const [comicsState, setComicsState] = useState(false);
+   const [comicsTitle, setComicsTitle] = useState('');
    const [imgComics, setImgComics] = useState(false);
 
    const {token_id, pages} = useParams()
@@ -33,6 +33,7 @@ const Lore = () => {
          .first();
 
          setComicsState(comics.attributes.pages[pages-1])
+         setComicsTitle(comics.attributes.Title)
       }
 
       getImgComics()
@@ -91,7 +92,6 @@ const Lore = () => {
       .equalTo("count", token_id)
       .first();
 
-      console.log(comics.attributes.pages)
       comics.attributes.pages.splice(pages - 1, 1)
       let updatePages = comics.attributes.pages
 
@@ -106,9 +106,7 @@ const Lore = () => {
       <>
          <div className="bodyPages py-5">
             <Container className="text-center">
-               <img src={HeaderTop} alt="" className="img-fluid" />
-                  <h1 className={s.title}>The Story of the First Pilgrim</h1>
-               <img src={HeaderBot} alt="" className="img-fluid" />
+               <Title title={comicsTitle} />
                <PaginationComp />
 
                {comicsState &&
@@ -132,14 +130,14 @@ const Lore = () => {
                               <button
                                  onClick={deleatePage} 
                                  className={`${s.btn} ${s.btnDeleate}`}
-                              >deleate this page</button>
+                              >delete this page</button>
                            </div>
 
                            <div className={s.btnBody}>
                               <button 
                                  onClick={deleateComics}
                                  className={`${s.btn} ${s.btnDeleate}`}
-                              >deleate this comics</button>
+                              >delete this comics</button>
                            </div>
 
                            <div className={s.btnBody}>

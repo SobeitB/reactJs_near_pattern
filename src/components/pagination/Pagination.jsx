@@ -45,7 +45,7 @@ export const PaginationComp = () => {
                {pagesBtn.map((page) => {
                   return(
                      <SwiperSlide 
-                     className={s.swiper_slide}
+                        className={s.swiper_slide}
                         key={page}
                      >
                         <Link 

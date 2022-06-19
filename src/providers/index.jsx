@@ -1,5 +1,6 @@
 import { RouterProvider } from "./router"
 import { MoralisProvider } from 'react-moralis';
+import {NotificationProvider} from "web3uikit";
 
 export const OtherProvider = () => {
    return(
@@ -7,7 +8,9 @@ export const OtherProvider = () => {
          serverUrl="https://wc1asdlezmub.usemoralis.com:2053/server"
          appId="T3u51dhDHamZkCqUkD2KIqydSEK22hOeqbLg7O3D"
       >
-         <RouterProvider />
+         <NotificationProvider>
+            <RouterProvider />
+         </NotificationProvider>
       </MoralisProvider>
    )
 }

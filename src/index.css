@@ -67,6 +67,7 @@
   text-align: right;
   color: #FFFFFF;
   text-decoration: none;
+  position: relative;
 }
 
 .header_link:hover {
@@ -74,8 +75,10 @@
 }
 
 .header_img{
-  max-width: 108px;
+  max-width: 84px;
   height: 9.34px;
+  position: absolute;
+  bottom:20px;
 }
 
 .footer{
@@ -232,4 +235,48 @@
 
 .swiper-wrapper{
   justify-content:center;
+}
+
+.titlePages{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;
+  color: #543927;
+  margin-bottom:8px;
+  margin-top:19px;
+}
+
+.out{
+  margin-left:4px;
+  position:relative;
+  top:-1.5px;
+  cursor: pointer;
+}
+
+.titleNft{
+  font-family: 'Alagard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 39px;
+  line-height: 40px;
+  text-align: center;
+  color: #543927;
+}
+
+.modal-content{
+  font-family: alagard;
+  background-color: #e3c39d !important;
+}
+
+.modal-header{
+  border-bottom: none !important;
+}
+
+.modal-footer{
+  border-top: none !important;
+}
+
+.modal-body{
+  font-size:17px !important;
 }

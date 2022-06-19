@@ -17,17 +17,8 @@ export const IsPageComics = ({children}) => {
          const comics = await query
          .equalTo("count", token_id)
          .first();
-
-         console.log(
-            comics !== undefined 
-            &&
-            comics.attributes.pages.length >= pages
-         )
-         setIsPages( 
-            comics !== undefined 
-            &&
-            comics.attributes.pages.length >= pages
-         ) 
+         
+         setIsPages(comics !== undefined) 
       }
 
       getComics()

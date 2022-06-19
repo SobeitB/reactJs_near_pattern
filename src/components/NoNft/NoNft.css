@@ -4,11 +4,33 @@
    background-repeat: no-repeat;
    background-position: 50% 50%;
    background-size: 100% 100%;
-   height: 100%;
+   height: 446.12px;
+   width: 100%;
 
    display: flex;
    flex-direction: column;
    align-items: center;
+   margin: 0 auto;
+   margin-top:40px;
+}
+
+@media (max-width:1050px) {
+   .not__nft_body{
+      width: 90%;
+      padding: 0 10px;
+   }
+}
+
+@media (max-width:369px) {
+   .not__nft_body{
+      height: 466px;
+   }
+}
+
+@media (max-width:295px) {
+   .not__nft_body{
+      height: 480px;
+   }
 }
 
 .title_skelet{

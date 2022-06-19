@@ -18,10 +18,12 @@ const AdminPamel = () => {
    const { save } = useNewMoralisObject("comics");
    const {saveFile} = useMoralisFile();
    const [file, setFile] = useState('');
+   const [page, setPage] = useState('');
    const navigate = useNavigate();
 
    const newComics = async (value) => {
       await login("admin", "admin")
+      console.log(value)
 
       const Comics = Moralis.Object.extend("comics");
       const query = new Moralis.Query(Comics);
@@ -29,10 +31,20 @@ const AdminPamel = () => {
       .find();
       let count = comicsFilter.length ? Number(comicsFilter[comicsFilter.length - 1].attributes.count) + 1 : 1
 
+      let pages = []
+      await saveFile("page.png", page, {
+         type: "image/png",
+         onSuccess: (result) => {
+            console.log(result._url)
+            pages = [result._url]
+         },
+         onError: (error) => console.log(error),
+      })
+
       let comics = {
          Title:value.Title,
          File:"",
-         pages:[],
+         pages:pages,
          count:String(count),
       }
 
@@ -64,6 +76,7 @@ const AdminPamel = () => {
       return yup.object().shape({
          Title: yup.string().typeError('Must be a string').required('Title is required'),
          File: yup.string().typeError('Must be a string').required('Image is required'),
+         Page: yup.string().typeError('Must be a string').required('Image is required'),
       })
    }, [])
 
@@ -78,6 +91,7 @@ const AdminPamel = () => {
                initialValues={{
                   Title:'',
                   File:'',
+                  Page:'',
                }}
                validationSchema={valid}
                onSubmit={newComics}
@@ -106,12 +120,25 @@ const AdminPamel = () => {
                         
                         <FormGroup 
                            handleChange={handleChange}
-                           values={values}
+                           File={values.File}
                            setFile={setFile}
+                           name="File"
                         />
                         {errors.File && touched.File &&
                            <p className={s.error}>{errors.File}</p>                           
                         }
+
+                        <h2 className={`title ${s.title}`}>Page comics</h2>
+                        
+                        <FormGroup 
+                           handleChange={handleChange}
+                           File={values.Page}
+                           setFile={setPage}
+                           name="Page"
+                        />
+                        {errors.Page && touched.Page &&
+                           <p className={s.error}>{errors.Page}</p>                           
+                        }  
 
                         <button className={`not__nft_btn ${s.btn}`} >next</button>
                      </div>

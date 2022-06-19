@@ -1,5 +1,5 @@
 import {useState, useEffect, useCallback} from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import HeaderTop from '../../assets/img/header-top.png';
 import HeaderBot from '../../assets/img/header-bot.png';
 import imgFrame from '../../assets/img/frame.png';
@@ -16,8 +16,9 @@ import {
   useParams,
   Link
 } from "react-router-dom";
+import {useNotification} from 'web3uikit';
 
-const PilgrimDetails = ({ kclick, tshow }) => {
+const PilgrimDetails = () => {
    const [ownedNft, setOwnedNft] = useState([]);
    // const [allNft, setAllNft] = useState([]);
    const [metadata, setMetadata] = useState([]);
@@ -34,7 +35,14 @@ const PilgrimDetails = ({ kclick, tshow }) => {
    const [conndata2, setConnData2] = useState([])
    const [conndata3, setConnData3] = useState([])
 
+   const [show, setShow] = useState(false);
+   const [isSaving, setIsSaving] = useState(false);
+
+   const handleClose = () => setShow(false);
+   const handleShow = () => setShow(true);
+
    let { token_id } = useParams();
+   const dispatchNotification = useNotification();
 
    async function get_owned_nft () {
       const owned_nft = await window.contract_nft.nft_tokens_for_owner({ account_id: window.accountId });
@@ -48,7 +56,7 @@ const PilgrimDetails = ({ kclick, tshow }) => {
    };
 
    const get_story = async () =>{
-      console.log(window.contract)
+      console.log(await window.contract.get_story({ nft_id: token_id }))
       await window.contract.get_story({ nft_id: token_id })
          .then(stry => {
             if(stry !== "Hello"){
@@ -87,23 +95,47 @@ const PilgrimDetails = ({ kclick, tshow }) => {
 
    const delay = ms => new Promise(res => setTimeout(res, ms));
 
+   const handleNewNotification = (type, icon, text, title) => {
+      dispatchNotification({
+         type,
+         message: text,
+         title: title,
+         icon,
+         position: 'topR',
+      });
+   };
+
+   useEffect(() => {
+      async function saving() {
+         // kclick({"show":true,"msg":"Saving the Story","head":"Saving"})
+         handleNewNotification("info", "info", "Saving the Story", "Saving")
+      
+         await delay(3000);
+         await window.contract.set_story({
+            story: tempstory,
+            nft_id: token_id,
+            nft_connection: JSON.stringify(tempConn)
+         })
+
+         get_story();
+
+         // kclick({"show":false,"msg":"Saving the Story","head":"Saving"})
+         // kclick({"show":true,"msg":"Success","head":"Success"})
+         handleNewNotification("success", "info", "Saving the Story", "Success")
+         await delay(3000);
+         // kclick({"show":false,"msg":"Success","head":"Success"})
+
+         // await alert("success")
+         setIsEdit(false)
+      }
+
+      if(isSaving) {
+         saving()
+      }
+   }, [isSaving])
+
    const save_story = async () => {
-      kclick({"show":true,"msg":"Saving the Story","head":"Saving"})
-      await window.contract.set_story({
-         story: tempstory,
-         nft_id: token_id,
-         nft_connection: JSON.stringify(tempConn)
-      })
-
-      get_story();
-
-      kclick({"show":false,"msg":"Saving the Story","head":"Saving"})
-      kclick({"show":true,"msg":"Success","head":"Success"})
-      await delay(3000);
-      kclick({"show":false,"msg":"Success","head":"Success"})
-
-      // await alert("success")
-      setIsEdit(false)
+      handleShow()
    }
 
    const get_params = async (tokenId) => {
@@ -170,7 +202,7 @@ const PilgrimDetails = ({ kclick, tshow }) => {
    if(isOwned && isEdit){
       lorebox = (
          <>
-         <Form.Control as="textarea" rows={17} onChange={x => setTempStory(x.target.value)} defaultValue={tempstory} disabled={tshow.show} />
+         <Form.Control as="textarea" rows={17} onChange={x => setTempStory(x.target.value)} defaultValue={tempstory} />
          <br />
          </>
          )
@@ -202,6 +234,24 @@ const PilgrimDetails = ({ kclick, tshow }) => {
 
    return (
       <div className="pilgrim py-5">
+         <Modal show={show} onHide={handleClose} >
+            <Modal.Header closeButton>
+               <Modal.Title>Save the Story</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>You can only save the story 1 time, are you sure?</Modal.Body>
+            <Modal.Footer>
+               <Button variant="secondary" onClick={handleClose}>
+                  No
+               </Button>
+               <Button variant="primary" onClick={() => {
+                  setIsSaving(true)
+                  handleClose()
+               }}>
+                  Yes
+               </Button>
+            </Modal.Footer>
+         </Modal>
+
          <Container className="pilgrim_detail p-2 p-sm-5">  
          <Row>
             <Col md={6} xs={12} className="py-3 px-4">
@@ -287,7 +337,7 @@ const PilgrimDetails = ({ kclick, tshow }) => {
                <Row className="text-center py-2 justify-content-md-center">
                <Col xs={6} className={`${pilgrimConn?.[0]>0 ? 'btn-conn' : ''}`}>
                   {isOwned && isEdit? 
-                     <Form.Control type="number" placeholder="Enter ID" defaultValue={pilgrimConn?.[0]} onChange={e => updateConn(e.target.value,0) } disabled={tshow.show} />
+                     <Form.Control type="number" placeholder="Enter ID" defaultValue={pilgrimConn?.[0]} onChange={e => updateConn(e.target.value,0) } />
                   :
                      <Link to={`/pilgrim/${pilgrimConn?.[0]}`}>
                      {hidechar(conndata0?.title)}          
@@ -296,7 +346,7 @@ const PilgrimDetails = ({ kclick, tshow }) => {
                </Col>
                <Col xs={6} className={`${pilgrimConn?.[1]>0 ? 'btn-conn' : ''}`}>
                   {isOwned && isEdit? 
-                     <Form.Control type="number" placeholder="Enter ID" defaultValue={pilgrimConn?.[1]} onChange={e => updateConn(e.target.value,1) } disabled={tshow.show} />
+                     <Form.Control type="number" placeholder="Enter ID" defaultValue={pilgrimConn?.[1]} onChange={e => updateConn(e.target.value,1) } />
                   :
                      <Link to={`/pilgrim/${pilgrimConn?.[1]}`}>
                      {hidechar(conndata1?.title)}
@@ -305,7 +355,7 @@ const PilgrimDetails = ({ kclick, tshow }) => {
                </Col>
                <Col xs={6} className={`${pilgrimConn?.[2]>0 ? 'btn-conn' : ''}`}>
                   {isOwned && isEdit? 
-                     <Form.Control type="number" placeholder="Enter ID" defaultValue={pilgrimConn?.[2]} onChange={e => updateConn(e.target.value,2) } disabled={tshow.show} />
+                     <Form.Control type="number" placeholder="Enter ID" defaultValue={pilgrimConn?.[2]} onChange={e => updateConn(e.target.value,2) } />
                   :
                      <Link to={`/pilgrim/${pilgrimConn?.[2]}`}>
                      {hidechar(conndata2?.title)}          
@@ -316,7 +366,7 @@ const PilgrimDetails = ({ kclick, tshow }) => {
                <Col xs={6} className={`${pilgrimConn?.[3]>0 ? 'btn-conn' : ''}`}>
                   
                   {isOwned && isEdit? 
-                     <Form.Control type="number" placeholder="Enter ID" defaultValue={pilgrimConn?.[3]} onChange={e => updateConn(e.target.value,3) } disabled={tshow.show} />
+                     <Form.Control type="number" placeholder="Enter ID" defaultValue={pilgrimConn?.[3]} onChange={e => updateConn(e.target.value,3) } />
                   :
                      <Link to={`/pilgrim/${pilgrimConn?.[3]}`}>
                      {hidechar(conndata3?.title)}          
@@ -337,10 +387,8 @@ const PilgrimDetails = ({ kclick, tshow }) => {
          </Row>
          <Row>
             <Col xs={2} md={2} className="py-2 pb-5">
-               {token_id > 0 ?
-               <Link to={token_id-1}><img src={btnLeft} height="40px" alt=""/></Link>
-               :
-               ""
+               {token_id > 0 &&
+                  <Link to={`/pilgrim/${(Number(token_id)-1)}`}><img src={btnLeft} height="40px" alt=""/></Link>
                }
             </Col>
             <Col xs={8} md={8} className="py-2 text-center text-sm-start">
@@ -353,10 +401,8 @@ const PilgrimDetails = ({ kclick, tshow }) => {
                </a>
             </Col>
             <Col xs={2} md={2} className="py-2 text-center text-sm-end">
-               {token_id < 1776 ?
-               <Link to={Number(token_id)+1}><img src={btnRight} height="40px" alt=""/></Link>
-               :
-               ""
+               {token_id < 1776 &&
+                  <Link to={`/pilgrim/${(Number(token_id)+1)}`}><img src={btnRight} height="40px" alt=""/></Link>
                }
             </Col>
          </Row>

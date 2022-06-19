@@ -12,10 +12,10 @@ function Pilgrim() {
 
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
-  const sorting = "asc";
+  const [sorting, setSorting] = useState("asc");
+  const [search, setSearch] = useState("");
+
   const itemsPerPage = 18;
 
   useEffect(() => {
@@ -39,33 +39,31 @@ function Pilgrim() {
     // Error Gas Limit
   // };
 
-   const get_total_supply = async () => {
-      const all_supply = await window.contract_nft.nft_total_supply();
-      console.log(all_supply);
-       setAllSupply(all_supply);
-       filter_pagi(all_supply,sorting,null)
-   };
+  const get_total_supply = async () => {
+    const all_supply = await window.contract_nft.nft_total_supply();
+    setAllSupply(all_supply);
+  };
 
-  function filter_pagi(supply,filter,search){
-    let arr = ([...Array(Number(supply)).keys()])
+  useEffect(() => {
+    let arr = ([...Array(Number(allSupply)).keys()])
     let startOffset = itemOffset;
     let endOffset = itemOffset + itemsPerPage;
-    if(filter === "desc"){
-      arr = ([...Array(Number(supply)).keys()]).reverse()
+
+    arr = arr.slice(startOffset, endOffset)
+
+    if(sorting === "desc"){
+      arr = arr.reverse()
     }
 
-    setPageCount(Math.ceil(Number(supply) / itemsPerPage));
-
+    setPageCount(Math.ceil(Number(allSupply) / itemsPerPage));
     if(search){
-
-      endOffset = 0 + supply;
-      startOffset = 0;
-      arr = arr.filter(x => x === search)
+      let oldArr = [...Array(Number(allSupply)).keys()]
+      arr = oldArr.filter(x => x === Number(search))
       setPageCount(1)
     }
 
-    setCurrentItems(arr.slice(startOffset, endOffset));
-  }
+    setCurrentItems(arr);
+  }, [allSupply, itemOffset, sorting, search])
 
   const handlePageClick = (event) => {
     const newOffset = event.selected * itemsPerPage % allSupply;
@@ -81,11 +79,11 @@ function Pilgrim() {
         {currentItems && 
           <Row className="pt-5 justify-content-end">
             <Col md={4} xs={12} className="py-2">
-              <Form.Control type="number" placeholder="Search ID" onChange={e => filter_pagi(allSupply,sorting,e.target.value)} />
+              <Form.Control type="number" value={search} placeholder="Search ID" onChange={(e) => setSearch(e.target.value)} />
             </Col>
 
             <Col md={2} xs={12} className="py-2">
-              <Form.Select aria-label="Sort" onChange={e => filter_pagi(allSupply,e.target.value,null)}>
+              <Form.Select aria-label="Sort" onChange={(e) => setSorting(e.target.value)}>
                 <option value="asc">ID (asc)</option>
                 <option value="desc">ID (desc)</option>
               </Form.Select>
@@ -109,8 +107,8 @@ function Pilgrim() {
             )
           })
           :
-          <NoNft text="pilgrim" />
-        }
+            <NoNft text="You can get your own Pilgrim on Paras to read comics!" />
+          }
         </Row>
           <ReactPaginate
             nextLabel="next >"

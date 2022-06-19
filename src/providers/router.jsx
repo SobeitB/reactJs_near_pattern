@@ -9,12 +9,17 @@ import { IsNft } from "./isNft";
 import { IsAdmin } from "./isAdmin";
 import { IsPageComics } from "./isPagesComics";
 import { Error404 } from "../pages/Error404/Error404";
+
 const Home = lazy(() => import ('../pages/Home'));
 const Pilgrim = lazy(() => import ('../pages/Pilgrim/Pilgrim'));
 const Comics = lazy(() => import ('../pages/Comics/Comics'));
 const PilgrimDetails = lazy(() => import ('../pages/PilgrimDetails/PilgrimDetails'));
 const Lore = lazy(() => import ('../pages/Lore/Lore'));
 const AdminPamel = lazy(() => import ('../pages/AdminPamel/AdminPamel'));
+const About = lazy(() => import ('../pages/About/About'));
+const Capes = lazy(() => import ('../pages/Capes/Capes'));
+const Map = lazy(() => import ('../pages/Map/Map'));
+const Accounts = lazy(() => import ('../pages/Accounts/Accounts'));
 
 export const RouterProvider = () => {
    return(
@@ -69,6 +74,38 @@ export const RouterProvider = () => {
                   <IsAdmin>
                      <AdminPamel />
                   </IsAdmin>
+               </main>
+            </Suspense>
+         } />
+
+         <Route path="/about" element={
+            <Suspense fallback={<main className="mainLoader"><Loader /></main>}>
+              <main className="main">
+                 <About />
+               </main>
+            </Suspense>
+         } />
+
+         <Route path="/capes" element={
+            <Suspense fallback={<main className="mainLoader"><Loader /></main>}>
+              <main className="main">
+                 <Capes />
+               </main>
+            </Suspense>
+         } />
+
+         <Route path="/map" element={
+            <Suspense fallback={<main className="mainLoader"><Loader /></main>}>
+              <main className="main">
+                 <Map />
+               </main>
+            </Suspense>
+         } />
+
+         <Route path="/accounts" element={
+            <Suspense fallback={<main className="mainLoader"><Loader /></main>}>
+              <main className="main">
+                 <Accounts />
                </main>
             </Suspense>
          } />

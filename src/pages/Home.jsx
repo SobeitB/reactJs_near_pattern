@@ -1,4 +1,9 @@
 import { Container, Row, Col } from 'react-bootstrap';
+import {
+   Title,
+   Text,
+   ExploerBtn,
+} from './home.styled'
 import './home.css';
 
 const Home = () => {
@@ -8,11 +13,16 @@ const Home = () => {
          <Container>
          <Row className="justify-content-center text-center">
             <Col sm={12} md={6} className="bgdrop">
-               <h1>Welcome to the Holistic Pilgrim</h1>
-               <br/>
-               <p>Holistic Pilgrim has no limits and it does not end, in this world any action has a connection with the next, even if you are not aware of it.</p>
-               <p>There is no good or bad, no truth or lies. In this world, you can be both a desperate space alien and a cute old man who owns a small bookstore.</p>
-               <p>And most importantly, everything in this world is connected.</p>
+               <Title>Welcome to the <br />Holistic Pilgrim</Title>
+               <Text>
+                  Forgotten Runes Wizard's Cult is a decentralized approach to world-building. Worlds like Middle Earth, the Star Wars Galaxy, and Westeros were built by singular, lone creators.
+                  <p style={{"marginTop": "25px"}} />
+                  Our Runiverse, however, is built by thousands of creators in our community.
+                  <p style={{"marginTop": "25px"}} />
+                  With the use of blockchain technologies, our world grows larger everyday.
+               </Text>
+
+               <ExploerBtn />
             </Col>
          </Row>
          </Container>

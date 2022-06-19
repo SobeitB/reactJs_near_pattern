@@ -9,7 +9,7 @@ const Pagination = ({ pages, setPages, allPages }) => {
       } else {
          pages > 0 && setPages(pages - 1)  
       }
-   }, [pages, allPages])
+   }, [pages, allPages]) 
 
    return (
       <div className="pagination">
